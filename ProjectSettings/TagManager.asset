@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - POIButton
+  - GUIButton
+  - List
   layers:
   - Default
   - TransparentFX

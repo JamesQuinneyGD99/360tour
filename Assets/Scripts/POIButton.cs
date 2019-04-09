@@ -17,4 +17,17 @@ public class POIButton : MonoBehaviour
     public void OnHoverExit(){
         PointCircleLoad.hoverTime = 0.0f;
     }
+
+    void OnHoverComplete(){
+        
+    }
+
+    void Update(){
+        if(inView && PointCircleLoad.hoverTime != 0.0f){
+            if(Time.time - PointCircleLoad.hoverTime >= 1.0f){
+                PointCircleLoad.hoverTime = 0.0f;
+                OnHoverComplete();
+            }
+        }
+    }
 }
