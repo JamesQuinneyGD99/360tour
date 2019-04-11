@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 // QUI16000158
 // James Quinney
@@ -9,9 +10,12 @@ public class GUIButton : MonoBehaviour
 {
     public bool inView; // Whether this button is currently being looked at
     [SerializeField]
-    GameObject other; // This is for zoom, disables the other button
-    public static List<GameObject> GUIButtons;
-    public static List<GameObject> lists;
+    GameObject other; // This is for zoom, disables the other button, This is also used to load rooms
+    public static List<GameObject> GUIButtons; // This is all of the buttons in the scene
+    public static List<GameObject> lists; // This is all of the lists in the scene
+
+    [SerializeField]
+    VideoClip loadOnComplete; // This is the video clip that loads when the button is pressed
 
     void Start(){
         if(GUIButtons == null){
@@ -38,73 +42,85 @@ public class GUIButton : MonoBehaviour
     
     // When the centre of the player's view exits the button
     public void OnHoverExit(){
-        PointCircleLoad.hoverTime = 0.0f;
+        PointCircleLoad.hoverTime = 0.0f; // Reset the circle
     }
 
     void OnHoverComplete(){
+        // We check to see if the button is part of a list
         if(transform.parent.gameObject.name == "List"){
-            transform.parent.gameObject.SetActive(false);
+            transform.parent.gameObject.SetActive(false); // We hide the list
         }
 
+        // We check which button it is 
         switch(gameObject.name){
             case "Rooms":
-                other.SetActive(!other.activeSelf);
+                other.SetActive(!other.activeSelf); // We toggle the room list
                 break;
             case "Options":
-                other.SetActive(!other.activeSelf);
+                other.SetActive(!other.activeSelf); // We toggle the options list
                 break;
             case "Return":
                 
                 break;
             case "Zoom+":
-                Camera.main.GetComponent<Camera>().fieldOfView = 30.0f;
-                gameObject.SetActive(false);
-                other.SetActive(true);
+                Camera.main.GetComponent<Camera>().fieldOfView = 30.0f; // We zoom in
+                gameObject.SetActive(false); // We hide the zoom in button 
+                other.SetActive(true); // We make the zoom out button visible
                 break;
             case "Zoom-":
-                Camera.main.GetComponent<Camera>().fieldOfView = 60.0f;
-                other.SetActive(true);
+                Camera.main.GetComponent<Camera>().fieldOfView = 60.0f; // We reset the zoom
+                other.SetActive(true); // We make the zoom in button visible
                 break;
             case "Accessibility":
+                // We make all lists active so we can modify the buttons
                 foreach(GameObject list in lists){
                     list.SetActive(true);
                 }
 
+                // We loop through each button
                 foreach(GameObject GUIButton in GUIButtons){
-                    Text buttonText = GUIButton.GetComponentInChildren<Text>();
-                    int fontSize = 20;
+                    Text buttonText = GUIButton.GetComponentInChildren<Text>(); // We find the text attached to the button
+                    int fontSize = 20; // The enlarged font size
+                    // We check if the text is currently enlarged
                     if(buttonText.fontSize == fontSize){
-                        buttonText.fontSize = fontSize / 2;
-                        Color defaultAlpha = GUIButton.GetComponent<Image>().color;
-                        GUIButton.GetComponent<Image>().color = new Color(defaultAlpha.r,defaultAlpha.g,defaultAlpha.b,0.25f);
+                        buttonText.fontSize = fontSize / 2; // We make the text smaller
+                        Color defaultAlpha = GUIButton.GetComponent<Image>().color; // We get the colour of the button
+                        GUIButton.GetComponent<Image>().color = new Color(defaultAlpha.r,defaultAlpha.g,defaultAlpha.b,0.25f); // We make the it more transparent
                     }
+                    // If the text isn't enlarged
                     else{
-                        buttonText.fontSize = fontSize;
-                        Color defaultAlpha = GUIButton.GetComponent<Image>().color;
-                        GUIButton.GetComponent<Image>().color = new Color(defaultAlpha.r,defaultAlpha.g,defaultAlpha.b,0.5f);
+                        buttonText.fontSize = fontSize; // We enlarge the text
+                        Color defaultAlpha = GUIButton.GetComponent<Image>().color; // We get the colour of the button
+                        GUIButton.GetComponent<Image>().color = new Color(defaultAlpha.r,defaultAlpha.g,defaultAlpha.b,0.5f); // We make it less transparent
                     }
                 }
 
+                // We deactivate the lists again
                 foreach(GameObject list in lists){
                     list.SetActive(false);
                 }
                 break;
             case "Colour":
+                // We activate the lists so we can edit their buttons
                 foreach(GameObject list in lists){
                     list.SetActive(true);
                 }
 
+                // We loop through each button
                 foreach(GameObject GUIButton in GUIButtons){
-                    Color defaultColor = GUIButton.GetComponent<Image>().color;
+                    Color defaultColor = GUIButton.GetComponent<Image>().color; // We store their current colour
 
+                    // We check to see if the button is the default colour
                     if(defaultColor.b == 1.0f){
-                        GUIButton.GetComponent<Image>().color = new Color(defaultColor.r,0.0f,0.0f,defaultColor.a);
+                        GUIButton.GetComponent<Image>().color = new Color(defaultColor.r,0.0f,0.0f,defaultColor.a); // We make the button red
                     }
+                    // We check if the button is currently red
                     else{
-                        GUIButton.GetComponent<Image>().color = new Color(1.0f,1.0f,1.0f,defaultColor.a);
+                        GUIButton.GetComponent<Image>().color = new Color(1.0f,1.0f,1.0f,defaultColor.a); // We reset the button colour
                     }
                 }
 
+                // We deactivate the lists again 
                 foreach(GameObject list in lists){
                     list.SetActive(false);
                 }

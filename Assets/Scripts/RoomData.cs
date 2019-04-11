@@ -14,6 +14,8 @@ public class RoomData : MonoBehaviour
 
     public GameObject textPanel;
 
+    public static Dictionary<string, Room> rooms;
+
     //Loads in all the data for the points on interest.
     private void Start()
     {
@@ -39,5 +41,6 @@ public class RoomData : MonoBehaviour
         information[3].Add(new Vector3(0, 0, 0), "B409 contains many computers that run the college network on virtual desktops.");
         information[3].Add(new Vector3(0, 0, 0), "B409 is a large space that is often used for meetings.");
 
+        rooms = new Dictionary<string, Room>();
     }
 }
