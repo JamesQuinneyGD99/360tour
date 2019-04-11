@@ -15,18 +15,25 @@ public class POIButton : MonoBehaviour
     
     // When the centre of the player's view exits the button
     public void OnHoverExit(){
-        PointCircleLoad.hoverTime = 0.0f;
+        PointCircleLoad.hoverTime = 0.0f; // Reset the circle
     }
 
     void OnHoverComplete(){
-        
+        // We check the name of the button
+        switch(gameObject.name){
+            
+            default:
+                break;
+        }
     }
 
     void Update(){
+        // We check to make sure the circle is in view, and hasn't already been clicked
         if(inView && PointCircleLoad.hoverTime != 0.0f){
+            // We check if the circle is full
             if(Time.time - PointCircleLoad.hoverTime >= 1.0f){
-                PointCircleLoad.hoverTime = 0.0f;
-                OnHoverComplete();
+                PointCircleLoad.hoverTime = 0.0f; // We reset the circle
+                OnHoverComplete(); // Well the button the circle has filled
             }
         }
     }
