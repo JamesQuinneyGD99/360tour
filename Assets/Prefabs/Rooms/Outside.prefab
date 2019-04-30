@@ -173,17 +173,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8346883181719487473}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 18.46}
+  m_LocalRotation: {x: 0.086448945, y: 0.6746463, z: -0.08003866, w: 0.7286789}
+  m_LocalPosition: {x: 0, y: 0, z: -5.48}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 8346883182786590287}
   m_Father: {fileID: 6174756879258862119}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 13.532001, y: 85.590004, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.19, y: 0}
+  m_AnchoredPosition: {x: 22.08, y: -5.4}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8346883181719487469
@@ -293,7 +293,6 @@ MonoBehaviour:
   inView: 0
   loadOnComplete: {fileID: 32900000, guid: a629deafa80f9c04180d159daeb21c09, type: 3}
   room: {fileID: 7697989186167214846, guid: 0366a3e2c66e48b42a064c7099a83cb1, type: 3}
-  videoPlayer: {fileID: 0}
 --- !u!1 &8346883182786590286
 GameObject:
   m_ObjectHideFlags: 0

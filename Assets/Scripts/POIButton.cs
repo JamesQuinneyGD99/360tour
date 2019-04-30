@@ -12,10 +12,17 @@ public class POIButton : MonoBehaviour
     VideoClip loadOnComplete; // This is the video that loads when you have finished hovering over the button
     [SerializeField]
     GameObject room; // This is the room that loads when the video completes
+    [SerializeField]
+    GameObject other; // This is the gameobject which can be interacted with
     VideoPlayer videoPlayer;
 
     void Start(){
         videoPlayer = GameObject.Find("Sphere").GetComponent<VideoPlayer>(); // We find the video player
+
+        // The other object is the text which is displayed when hovering over a button
+        if(other != null){
+            other.SetActive(false); // We want it to be disabled when the room starts
+        }
     }
 
     // When the centre of the player's view enters the button
@@ -29,12 +36,6 @@ public class POIButton : MonoBehaviour
     }
 
     void OnHoverComplete(){
-        // We check the name of the button
-        switch(gameObject.name){
-            
-            default:
-                break;
-        }
 
         // We check if this buttons loads a video
         if(loadOnComplete != null){
@@ -43,8 +44,17 @@ public class POIButton : MonoBehaviour
             Room.currentRoom.GetComponent<Room>().textPanel = Room.currentRoom.transform.Find("POICanvas").gameObject; // We store the canvas for the other room
             Room.currentRoom.transform.Find("POICanvas").gameObject.SetActive(false); // We hide the buttons in the new room
             videoPlayer.clip = loadOnComplete; // Load our video in
+            videoPlayer.playbackSpeed = 1.0f; // Reset the playback speed;
             videoPlayer.Play(); // Start the video
-            videoPlayer.playbackSpeed = 1.0f;
+        }
+
+        // Check which button we are hovering
+        switch(gameObject.name){
+            case "Info":
+                other.SetActive(!other.activeSelf); // Show/hide the info
+                break;
+            default: 
+                break;
         }
     }
 

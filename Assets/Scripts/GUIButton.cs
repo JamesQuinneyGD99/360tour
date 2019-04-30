@@ -16,6 +16,9 @@ public class GUIButton : MonoBehaviour
 
     [SerializeField]
     VideoClip loadOnComplete; // This is the video clip that loads when the button is pressed
+    [SerializeField]
+    GameObject room; // This is the room that loads when the video completes
+    VideoPlayer videoPlayer;
 
     void Start(){
         if(GUIButtons == null){
@@ -31,6 +34,8 @@ public class GUIButton : MonoBehaviour
                 list.SetActive(false);
             }
         }
+
+        videoPlayer = GameObject.Find("Sphere").GetComponent<VideoPlayer>(); // We find the video player
     }
 
     // When the centre of the player's view enters the button
@@ -123,6 +128,30 @@ public class GUIButton : MonoBehaviour
                 // We deactivate the lists again 
                 foreach(GameObject list in lists){
                     list.SetActive(false);
+                }
+                break;
+            case "B408":
+                // We check if this buttons loads a video
+                if(loadOnComplete != null){
+                    Destroy(Room.currentRoom); // We get rid of the old room
+                    Room.currentRoom = Instantiate(room,new Vector3(0,0,0),Quaternion.identity); // We add the new room
+                    Room.currentRoom.GetComponent<Room>().textPanel = Room.currentRoom.transform.Find("POICanvas").gameObject; // We store the canvas for the other room
+                    Room.currentRoom.transform.Find("POICanvas").gameObject.SetActive(false); // We hide the buttons in the new room
+                    videoPlayer.clip = loadOnComplete; // Load our video in
+                    videoPlayer.playbackSpeed = 100.0f; // Reset the playback speed;
+                    videoPlayer.Play(); // Start the video
+                }
+                break;
+            case "Outside":
+                // We check if this buttons loads a video
+                if(loadOnComplete != null){
+                    Destroy(Room.currentRoom); // We get rid of the old room
+                    Room.currentRoom = Instantiate(room,new Vector3(0,0,0),Quaternion.identity); // We add the new room
+                    Room.currentRoom.GetComponent<Room>().textPanel = Room.currentRoom.transform.Find("POICanvas").gameObject; // We store the canvas for the other room
+                    Room.currentRoom.transform.Find("POICanvas").gameObject.SetActive(false); // We hide the buttons in the new room
+                    videoPlayer.clip = loadOnComplete; // Load our video in
+                    videoPlayer.playbackSpeed = 100.0f; // Reset the playback speed;
+                    videoPlayer.Play(); // Start the video
                 }
                 break;
             default:
