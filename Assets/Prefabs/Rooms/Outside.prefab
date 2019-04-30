@@ -214,7 +214,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 459c9a4e0928b6e49bcc70e7ea0503b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 166d92274cbab274b9f60ce3600b1404, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -293,6 +293,7 @@ MonoBehaviour:
   inView: 0
   loadOnComplete: {fileID: 32900000, guid: a629deafa80f9c04180d159daeb21c09, type: 3}
   room: {fileID: 7697989186167214846, guid: 0366a3e2c66e48b42a064c7099a83cb1, type: 3}
+  other: {fileID: 0}
 --- !u!1 &8346883182786590286
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,4 +372,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Goto
+  m_Text: B408
